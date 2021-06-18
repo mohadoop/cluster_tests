@@ -1,0 +1,262 @@
+{
+    "cdhVersion": "7.1.6",
+    "cmVersion": "7.3.1",
+    "displayName": "Cluster1",
+    "repositories": [
+        "https://archive.cloudera.com/p/cdh7/{latest_supported}/parcels/",
+        "https://archive.cloudera.com/cdh7/{latest_supported}/parcels/",
+        "https://archive.cloudera.com/p/cdh6/{latest_supported}/parcels/",
+        "https://archive.cloudera.com/cdh6/{latest_supported}/parcels/",
+        "https://archive.cloudera.com/p/cdh5/parcels/latest",
+        "https://archive.cloudera.com/cdh5/parcels/5.16/",
+        "https://parcels.repos.intel.com/mkl/latest",
+        "https://archive.cloudera.com/accumulo-c5/parcels/latest/",
+        "https://archive.cloudera.com/accumulo6/6.1/parcels/",
+        "https://archive.cloudera.com/kafka/parcels/latest/",
+        "http://archive.cloudera.com/kudu/parcels/latest/",
+        "https://archive.cloudera.com/sqoop-teradata-connector1/latest/parcels/",
+        "https://archive.cloudera.com/sqoop-netezza-connector1/latest/",
+        "https://archive.cloudera.com/sqoop-connectors/parcels/latest/"
+    ],
+    "hostTemplates": [
+        {
+            "cardinality": 1.0, 
+            "refName": "HostTemplate-master1", 
+            "roleConfigGroupsRefNames": ["hdfs-NAMENODE-BASE", "hive-GATEWAY-BASE", "knox-KNOX_GATEWAY-BASE", "livy-LIVY_SERVER-BASE", "queuemanager-QUEUEMANAGER_STORE-BASE", "queuemanager-QUEUEMANAGER_WEBAPP-BASE", "spark_on_yarn-GATEWAY-BASE", "tez-GATEWAY-BASE"]
+        },
+        {
+            "cardinality": 1.0, 
+            "refName": "HostTemplate-master2", 
+            "roleConfigGroupsRefNames": ["hbase-MASTER-BASE", "hdfs-BALANCER-BASE", "hdfs-SECONDARYNAMENODE-BASE", "hive-GATEWAY-BASE", "hive-HIVEMETASTORE-BASE", "hive_on_tez-HIVESERVER2-BASE", "impala-CATALOGSERVER-BASE", "impala-STATESTORE-BASE", "solr-SOLR_SERVER-BASE", "spark_on_yarn-GATEWAY-BASE", "spark_on_yarn-SPARK_YARN_HISTORY_SERVER-BASE", "tez-GATEWAY-BASE", "yarn-JOBHISTORY-BASE", "yarn-RESOURCEMANAGER-BASE", "zookeeper-SERVER-BASE"]
+        },
+        {
+            "cardinality": 1.0, 
+            "refName": "HostTemplate-kudu", 
+            "roleConfigGroupsRefNames": ["hive-GATEWAY-BASE", "kudu-KUDU_MASTER-BASE", "kudu-KUDU_TSERVER-BASE", "spark_on_yarn-GATEWAY-BASE", "tez-GATEWAY-BASE"]
+        },
+        {
+            "cardinality": 1.0, 
+            "refName": "HostTemplate-atlas-and-datanode", 
+            "roleConfigGroupsRefNames": ["atlas-ATLAS_SERVER-BASE", "hbase-REGIONSERVER-BASE", "hdfs-DATANODE-BASE", "hive-GATEWAY-BASE", "impala-IMPALAD-BASE", "spark_on_yarn-GATEWAY-BASE", "tez-GATEWAY-BASE", "yarn-NODEMANAGER-BASE"]
+        }, 
+        {
+            "cardinality": 1.0, 
+            "refName": "HostTemplate-datanode", 
+            "roleConfigGroupsRefNames": [ "hbase-REGIONSERVER-BASE", "hdfs-DATANODE-BASE", "hive-GATEWAY-BASE", "impala-IMPALAD-BASE", "spark_on_yarn-GATEWAY-BASE", "tez-GATEWAY-BASE", "yarn-NODEMANAGER-1"]
+        }, 
+        {
+            "cardinality": 1.0, 
+            "refName": "HostTemplate-kafka", 
+            "roleConfigGroupsRefNames": ["hive-GATEWAY-BASE", "kafka-KAFKA_BROKER-BASE", "spark_on_yarn-GATEWAY-BASE", "tez-GATEWAY-BASE"]
+        }
+    ], 
+    "instantiator": {
+        "clusterName": "Cluster1", 
+        "hosts": [
+            {
+                "hostName": "ccycloud-1.citi-ansible.root.hwx.site",
+                "hostTemplateRefName": "HostTemplate-master1"
+            },
+            {
+                "hostName": "ccycloud-2.citi-ansible.root.hwx.site",
+                "hostTemplateRefName": "HostTemplate-master2"
+            },
+            {
+                "hostName": "ccycloud-3.citi-ansible.root.hwx.site",
+                "hostTemplateRefName": "HostTemplate-kudu"
+            },
+            {
+                "hostName": "ccycloud-4.citi-ansible.root.hwx.site",
+                "hostTemplateRefName": "HostTemplate-kafka"
+            },
+            {
+                "hostName": "ccycloud-5.citi-ansible.root.hwx.site",
+                "hostTemplateRefName": "HostTemplate-atlas-and-datanode"
+            },
+            {
+                "hostNameRange": "ccycloud-[6-7].citi-ansible.root.hwx.site", 
+                "hostTemplateRefName": "HostTemplate-datanode"
+            }
+        ], 
+        "lenient": false, 
+        "roleConfigGroups": [
+            {
+                "name": "", 
+                "rcgRefName": "yarn-NODEMANAGER-2"
+            }, 
+            {
+                "name": "", 
+                "rcgRefName": "yarn-NODEMANAGER-1"
+            }
+        ], 
+        "variables": [
+            {"name": "atlas-ATLAS_SERVER-BASE-atlas_admin_password", "value": "Cloudera123"},
+            {"name": "hive-hive_metastore_database_host", "value": "ccycloud-1.citi-ansible.root.hwx.site"},
+            {"name": "hive-hive_metastore_database_password", "value": "Cloudera123"},
+            {"name": "hive-hive_metastore_database_port", "value": "5432"},
+            {"name": "hive-hive_metastore_database_type", "value": "postgresql"},
+            {"name": "knox-KNOX_GATEWAY-BASE-gateway_master_secret", "value": "Cloudera123"},
+            {"name": "kudu-KUDU_MASTER-BASE-fs_data_dirs", "value": "/var/log/kudu/master/data"},
+            {"name": "kudu-KUDU_MASTER-BASE-fs_wal_dir", "value": "/var/log/kudu/master/wal"},
+            {"name": "kudu-KUDU_TSERVER-BASE-fs_data_dirs", "value": "/var/log/kudu/tablet/data"},
+            {"name": "kudu-KUDU_TSERVER-BASE-fs_wal_dir", "value": "/var/log/kudu/tablet/wal"}
+        ]
+    }, 
+    "products": [
+        {
+            "product": "CDH", 
+            "version": "7.1.6-1.cdh7.1.6.p0.10506313"
+        }
+    ], 
+    "services": [
+        {
+            "serviceType": "KUDU",
+            "refName": "kudu", 
+            "roleConfigGroups": [
+                {
+                    "base": true, 
+                    "configs": [
+                        {"name": "fs_wal_dir", "variable": "kudu-KUDU_MASTER-BASE-fs_wal_dir"}, 
+                        {"name": "fs_data_dirs", "variable": "kudu-KUDU_MASTER-BASE-fs_data_dirs"}
+                    ], 
+                    "refName": "kudu-KUDU_MASTER-BASE", 
+                    "roleType": "KUDU_MASTER"
+                }, 
+                {
+                    "base": true, 
+                    "configs": [
+                        {"name": "fs_wal_dir", "variable": "kudu-KUDU_TSERVER-BASE-fs_wal_dir"},
+                        {"name": "fs_data_dirs", "variable": "kudu-KUDU_TSERVER-BASE-fs_data_dirs"}],
+                    "refName": "kudu-KUDU_TSERVER-BASE",
+                    "roleType": "KUDU_TSERVER"
+                }
+            ]
+        }, 
+        {
+            "serviceType": "LIVY",
+            "refName": "livy", 
+            "roleConfigGroups": [{"base": true, "refName": "livy-LIVY_SERVER-BASE","roleType": "LIVY_SERVER"}]
+            
+        }, 
+        {
+            "serviceType": "IMPALA",
+            "refName": "impala", 
+            "roleConfigGroups": [
+                {"base": true, "refName": "impala-IMPALAD-BASE","roleType": "IMPALAD"},
+                {"base": true, "refName": "impala-STATESTORE-BASE", "roleType": "STATESTORE"},
+                {"base": true, "refName": "impala-CATALOGSERVER-BASE", "roleType": "CATALOGSERVER"}
+            ]
+        }, 
+        {
+            "refName": "atlas", 
+            "roleConfigGroups": [
+                {
+                    "base": true, 
+                    "configs": [{"name": "atlas_admin_password", "variable": "atlas-ATLAS_SERVER-BASE-atlas_admin_password"}], 
+                    "refName": "atlas-ATLAS_SERVER-BASE", 
+                    "roleType": "ATLAS_SERVER"
+                }
+            ], 
+            "serviceType": "ATLAS"
+        }, 
+        {
+            "serviceType": "KNOX",
+            "refName": "knox", 
+            "roleConfigGroups": [
+                {
+                    "base": true, 
+                    "configs": [{"name": "gateway_master_secret", "variable": "knox-KNOX_GATEWAY-BASE-gateway_master_secret"}], 
+                    "refName": "knox-KNOX_GATEWAY-BASE", 
+                    "roleType": "KNOX_GATEWAY"
+                }
+            ]
+        }, 
+        {
+            "serviceType": "ZOOKEEPER",
+            "refName": "zookeeper", 
+            "roleConfigGroups": [{"base": true, "refName": "zookeeper-SERVER-BASE", "roleType": "SERVER"}]
+        }, 
+        {
+            "serviceType": "HIVE_ON_TEZ",
+            "refName": "hive_on_tez", 
+            "roleConfigGroups": [{"base": true, "refName": "hive_on_tez-HIVESERVER2-BASE", "roleType": "HIVESERVER2"}]
+        }, 
+        {
+            "serviceType": "QUEUEMANAGER",
+            "refName": "queuemanager", 
+            "roleConfigGroups": [
+                {"base": true, "refName": "queuemanager-QUEUEMANAGER_WEBAPP-BASE", "roleType": "QUEUEMANAGER_WEBAPP"}, 
+                {"base": true, "refName": "queuemanager-QUEUEMANAGER_STORE-BASE", "roleType": "QUEUEMANAGER_STORE"}
+            ]
+        }, 
+        {
+            "serviceType": "HDFS",
+            "refName": "hdfs", 
+            "roleConfigGroups": [
+                {"base": true, "refName": "hdfs-NAMENODE-BASE", "roleType": "NAMENODE"}, 
+                {"base": true, "refName": "hdfs-SECONDARYNAMENODE-BASE", "roleType": "SECONDARYNAMENODE"}, 
+                {"base": true, "refName": "hdfs-DATANODE-BASE", "roleType": "DATANODE"}, 
+                {"base": true, "refName": "hdfs-BALANCER-BASE", "roleType": "BALANCER"}
+            ]
+        }, 
+        {
+            "serviceType": "TEZ",
+            "refName": "tez", 
+            "roleConfigGroups": [{"base": true, "refName": "tez-GATEWAY-BASE", "roleType": "GATEWAY"}]
+        }, 
+        {
+            "serviceType": "HBASE",
+            "refName": "hbase", 
+            "roleConfigGroups": [
+                {"base": true, "refName": "hbase-REGIONSERVER-BASE", "roleType": "REGIONSERVER"},
+                {"base": true, "refName": "hbase-MASTER-BASE", "roleType": "MASTER"}
+            ]
+        }, 
+        {
+            "serviceType": "KAFKA",
+            "refName": "kafka", 
+            "roleConfigGroups": [
+                {"base": true, "refName": "kafka-KAFKA_BROKER-BASE", "roleType": "KAFKA_BROKER"}
+            ]
+        }, 
+        {
+            "serviceType": "SOLR",
+            "refName": "solr", 
+            "roleConfigGroups": [{"base": true, "refName": "solr-SOLR_SERVER-BASE","roleType": "SOLR_SERVER"}]
+        },
+        {
+            "serviceType": "HIVE",
+            "refName": "hive", 
+            "roleConfigGroups": [
+                {"base": true, "refName": "hive-GATEWAY-BASE", "roleType": "GATEWAY"},
+                {"base": true, "refName": "hive-HIVEMETASTORE-BASE", "roleType": "HIVEMETASTORE"}
+            ], 
+            "serviceConfigs": [
+                {"name": "hive_metastore_database_password", "variable": "hive-hive_metastore_database_password"},
+                {"name": "hive_metastore_database_port", "variable": "hive-hive_metastore_database_port"},
+                {"name": "hive_metastore_database_host", "variable": "hive-hive_metastore_database_host"},
+                {"name": "hive_metastore_database_type", "variable": "hive-hive_metastore_database_type"}
+            ]
+        },
+        {
+            "serviceType": "SPARK_ON_YARN",
+            "refName": "spark_on_yarn", 
+            "roleConfigGroups": [
+                {"base": true, "refName": "spark_on_yarn-SPARK_YARN_HISTORY_SERVER-BASE", "roleType": "SPARK_YARN_HISTORY_SERVER"},
+                {"base": true, "refName": "spark_on_yarn-GATEWAY-BASE", "roleType": "GATEWAY"}
+            ]
+            
+        },
+        {
+            "serviceType": "YARN",
+            "refName": "yarn", 
+            "roleConfigGroups": [
+                {"base": true, "refName": "yarn-RESOURCEMANAGER-BASE", "roleType": "RESOURCEMANAGER"},
+                {"base": false, "refName": "yarn-NODEMANAGER-2", "roleType": "NODEMANAGER"},
+                {"base": true, "refName": "yarn-NODEMANAGER-BASE", "roleType": "NODEMANAGER"},
+                {"base": false, "refName": "yarn-NODEMANAGER-1", "roleType": "NODEMANAGER"},
+                {"base": true, "refName": "yarn-JOBHISTORY-BASE", "roleType": "JOBHISTORY"}
+            ]
+        }
+    ]
+}
