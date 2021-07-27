@@ -1,9 +1,0 @@
-                {
-                    "refName": "{{ ref_name }}",
-                    "roleType": "MASTER",
-                    "base": false, 
-                    "configs": [
-                        {"name": "master_truststore_password", "value": "{{ truststore_password }}"},
-                        {"name": "master_truststore_file", "value": "{{ cluster_keystore_path }}{{ cluster_truststore_filename }}"}
-                    ]
-                }
