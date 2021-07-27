@@ -1,0 +1,18 @@
+{
+   "services": [
+        {
+            "serviceType": "{{ service_type }}",
+            "refName": "{{ service_ref_name }}",
+            "roleConfigGroups": [
+{{ role_config_groups }}
+            ], 
+            "serviceConfigs": [
+                {"name": "zookeeper_tls_truststore_password", "value": "{{ truststore_password }}"},
+                {"name": "zookeeper_tls_truststore", "value": "{{ cluster_keystore_path }}{{ cluster_truststore_filename }}"},
+                {"name": "zookeeper_tls_keystore_password", "value": "{{ keystore_password }}"},
+                {"name": "zookeeper_tls_keystore", "value": "{{ cluster_keystore_path }}{{ cluster_keystore_filename }}"},
+                {"name": "zookeeper_tls_enabled", "value": "true"}
+            ]
+        }
+    ]
+}

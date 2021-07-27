@@ -1,0 +1,30 @@
+{
+   "services": [
+        {
+            "serviceType": "ZOOKEEPER",
+            "refName": "zookeeper", 
+            "roleConfigGroups": [
+                {
+                    "refName": "zookeeper-SERVER-BASE", 
+                    "roleType": "SERVER",
+                    "base": false, 
+                    "configs": [
+                        {"name": "jmx_tls_truststore_password", "value": "Cloudera123"}, 
+                        {"name": "jmx_tls_client_auth_enabled", "value": "true"}, 
+                        {"name": "jmx_tls_enabled", "value": "true"}, 
+                        {"name": "jmx_tls_truststore", "value": "/opt/cloudera/security/pki/cluster_truststore.jks"},
+                        {"name": "jmx_tls_keystore", "value": "/opt/cloudera/security/pki/host_keystore.jks"},
+                        {"name": "jmx_tls_keystore_password", "value": "Cloudera123"}
+                    ]
+                }
+            ], 
+            "serviceConfigs": [
+                {"name": "zookeeper_tls_truststore_password", "value": "Cloudera123"},
+                {"name": "zookeeper_tls_truststore", "value": "/opt/cloudera/security/pki/cluster_truststore.jks"},
+                {"name": "zookeeper_tls_keystore_password", "value": "Cloudera123"},
+                {"name": "zookeeper_tls_keystore", "value": "/opt/cloudera/security/pki/host_keystore.jks"},
+                {"name": "zookeeper_tls_enabled", "value": "true"}
+            ]
+        }
+    ]
+}

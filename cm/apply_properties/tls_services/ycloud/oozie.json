@@ -1,0 +1,28 @@
+{
+   "services": [
+        {
+            "serviceType": "OOZIE",
+            "refName": "oozie", 
+            "roleConfigGroups": [
+                {
+                    "refName": "oozie-OOZIE_SERVER-BASE",
+                    "roleType": "OOZIE_SERVER",
+                    "base": false, 
+                    "configs": [
+                        {"name": "oozie_https_keystore_file", "value": "/opt/cloudera/security/pki/host_keystore.jks"},
+                        {"name": "oozie_zookeeper_https_truststore_file", "value": "/opt/cloudera/security/pki/cluster_truststore.jks"},
+                        {"name": "oozie_https_keystore_password", "value": "Cloudera123"},
+                        {"name": "oozie_zookeeper_https_keystore_password", "value": "Cloudera123"},
+                        {"name": "oozie_https_truststore_file", "value": "/opt/cloudera/security/pki/cluster_truststore.jks"},
+                        {"name": "oozie_https_truststore_password", "value": "Cloudera123"},
+                        {"name": "oozie_zookeeper_https_keystore_file", "value": "/opt/cloudera/security/pki/host_keystore.jks"},
+                        {"name": "oozie_zookeeper_https_truststore_password", "value": "Cloudera123"}
+                    ]
+                }
+            ], 
+            "serviceConfigs": [
+                {"name": "oozie_use_ssl", "value": "true"}
+            ]
+        }
+    ]
+}

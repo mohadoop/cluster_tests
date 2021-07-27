@@ -1,0 +1,36 @@
+{
+   "services": [
+        {
+            "serviceType": "KUDU",
+            "refName": "kudu",
+            "roleConfigGroups": [
+                {
+                    "refName": "kudu-KUDU_TSERVER-BASE",
+                    "roleType": "KUDU_TSERVER",
+                    "base": false, 
+                    "configs": [
+                        {"name": "ssl_server_ca_certificate_location", "value": "/opt/cloudera/security/pki/rootCA.pem"},
+                        {"name": "ssl_enabled", "value": "true"},
+                        {"name": "ssl_server_privatekey_password", "value": "Cloudera123"},
+                        {"name": "ssl_server_privatekey_location", "value": "/opt/cloudera/security/pki/host.pem"},
+                        {"name": "ssl_server_certificate_location", "value": "/opt/cloudera/security/pki/host.crt"}
+                    ]
+                }, 
+                {
+                    "refName": "kudu-KUDU_MASTER-BASE",
+                    "roleType": "KUDU_MASTER",
+                    "base": false,
+                    "configs": [
+                        {"name": "ssl_client_truststore_location", "value": "/opt/cloudera/security/pki/cluster_truststore.jks"},
+                        {"name": "ssl_server_ca_certificate_location", "value": "/opt/cloudera/security/pki/rootCA.pem"},
+                        {"name": "ssl_client_truststore_password", "value": "Cloudera123"},
+                        {"name": "ssl_enabled", "value": "true"},
+                        {"name": "ssl_server_privatekey_location", "value": "/opt/cloudera/security/pki/host.pem"},
+                        {"name": "ssl_server_privatekey_password", "value": "Cloudera123"},
+                        {"name": "ssl_server_certificate_location", "value": "/opt/cloudera/security/pki/host.crt"}
+                    ]
+                }
+            ]
+        }
+    ]
+}

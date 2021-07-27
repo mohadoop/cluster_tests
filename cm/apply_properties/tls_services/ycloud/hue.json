@@ -1,0 +1,32 @@
+{
+   "services": [
+        {
+            "serviceType": "HUE",
+            "refName": "hue", 
+            "roleConfigGroups": [
+                {
+                    "refName": "hue-HUE_SERVER-BASE", 
+                    "roleType": "HUE_SERVER",
+                    "base": false, 
+                    "configs": [
+                        {"name": "ssl_certificate", "value": "/opt/cloudera/security/pki/host.crt"}, 
+                        {"name": "ssl_private_key_password", "value": "Cloudera123"}, 
+                        {"name": "ssl_cacerts", "value": "/opt/cloudera/security/pki/rootCA.pem"}, 
+                        {"name": "ssl_enable", "value": "true"}, 
+                        {"name": "ssl_private_key", "value": "/opt/cloudera/security/pki/host.key"}
+                    ]
+                }, 
+                {
+                    "refName": "hue-HUE_LOAD_BALANCER-BASE", 
+                    "roleType": "HUE_LOAD_BALANCER",
+                    "base": false, 
+                    "configs": [
+                        {"name": "ssl_certificate", "value": "/opt/cloudera/security/pki/host.crt"}, 
+                        {"name": "passphrasefile_location", "value": "/opt/cloudera/security/pki/key.pwd"}, 
+                        {"name": "ssl_certificate_key", "value": "/opt/cloudera/security/pki/host.key"}
+                    ]
+                }
+            ]
+        }
+    ]
+}

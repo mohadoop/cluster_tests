@@ -1,0 +1,10 @@
+                {
+                    "refName": "{{ ref_name }}", 
+                    "roleType": "LIVY_SERVER",
+                    "base": false, 
+                    "configs": [
+                        {"name": "ssl_server_keystore_location", "value": "{{ cluster_keystore_path }}{{ cluster_keystore_filename }}"},
+                        {"name": "ssl_enabled", "value": "true"},
+                        {"name": "ssl_server_keystore_password", "value": "{{ keystore_password }}"}
+                    ]
+                }

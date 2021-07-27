@@ -1,0 +1,15 @@
+{
+   "services": [
+        {
+            "serviceType": "{{ service_type }}",
+            "refName": "{{ service_ref_name }}",
+            "serviceConfigs": [
+                {"name": "solr_https_truststore_file", "value": "{{ cluster_keystore_path }}{{ cluster_truststore_filename }}"},
+                {"name": "solr_https_truststore_password", "value": "{{ truststore_password }}"},
+                {"name": "solr_https_keystore_file", "value": "{{ cluster_keystore_path }}{{ cluster_keystore_filename }}"},
+                {"name": "solr_https_keystore_password", "value": "{{ keystore_password }}"},
+                {"name": "solr_use_ssl", "value": "true"}
+            ]
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+   "services": [
+        {
+            "serviceType": "ZEPPELIN",
+            "refName": "zeppelin", 
+            "roleConfigGroups": [
+                {
+                    "refName": "zeppelin-ZEPPELIN_SERVER-BASE", 
+                    "roleType": "ZEPPELIN_SERVER",
+                    "base": false, 
+                    "configs": [
+                        {"name": "ssl_client_truststore_location", "value": "/opt/cloudera/security/pki/cluster_truststore.jks"},
+                        {"name": "ssl_server_keystore_location", "value": "/opt/cloudera/security/pki/host_keystore.jks"},
+                        {"name": "ssl_client_truststore_password", "value": "Cloudera123"},
+                        {"name": "ssl_enabled", "value": "true"},
+                        {"name": "ssl_server_keystore_password", "value": "Cloudera123"}
+                    ]
+                }
+            ]
+        }
+   ]
+}

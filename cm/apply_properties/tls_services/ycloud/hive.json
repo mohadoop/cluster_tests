@@ -1,0 +1,18 @@
+{
+   "services": [
+        {
+            "serviceType": "HIVE",
+            "refName": "hive", 
+            "serviceConfigs": [
+                {"name": "hiveserver2_enable_ssl", "value": "true"}, 
+                {"name": "hiveserver2_keystore_path", "value": "/opt/cloudera/security/pki/host_keystore.jks"}, 
+                {"name": "hiveserver2_keystore_password", "value": "Cloudera123"},
+                {"name": "hiveserver2_truststore_file", "value": "/opt/cloudera/security/pki/cluster_truststore.jks"}, 
+                {"name": "hiveserver2_truststore_password", "value": "Cloudera123"},
+                {"name": "ssl_enabled_database", "value": "true"},
+                {"name": "ssl_client_truststore_location", "value": "/opt/cloudera/security/pki/cluster_truststore.jks"},
+                {"name": "ssl_client_truststore_password", "variable": "Cloudera123"}
+            ]
+        }
+    ]
+}

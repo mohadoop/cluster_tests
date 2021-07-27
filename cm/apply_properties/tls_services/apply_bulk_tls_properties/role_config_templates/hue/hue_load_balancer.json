@@ -1,0 +1,10 @@
+                {
+                    "refName": "{{ ref_name }}", 
+                    "roleType": "HUE_LOAD_BALANCER",
+                    "base": false, 
+                    "configs": [
+                        {"name": "ssl_certificate", "value": "{{ cluster_ssl_cert_path }}{{ cluster_cert_filename }}"}, 
+                        {"name": "passphrasefile_location", "value": "{{ cluster_ssl_cert_path }}{{ cluster_key_pw_filename }}"}, 
+                        {"name": "ssl_certificate_key", "value": "{{ cluster_ssl_cert_path }}{{ cluster_key_pem_filename }}"}
+                    ]
+                }

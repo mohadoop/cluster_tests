@@ -1,0 +1,17 @@
+                {
+                    "refName": "{{ ref_name }}", 
+                    "roleType": "RANGER_KMS_SERVER",
+                    "base": true, 
+                    "configs": [
+                        {"name": "ranger_ks_truststore_password", "value": "{{ truststore_password }}"},
+                        {"name": "ranger_ks_keystore_password", "value": "{{ keystore_password }}"},
+                        {"name": "ranger_kms_master_key_password", "value": "{{ key_password }}"},
+                        {"name": "ranger_ks_keystore_file", "value": "{{ cluster_keystore_path }}{{ cluster_keystore_filename }}"},
+                        {"name": "ranger_ks_truststore_file", "value": "{{ cluster_keystore_path }}{{ cluster_truststore_filename }}"},
+                        {"name": "ranger_ks_db_ssl_certificateFile", "value": "{{ cluster_ssl_cert_path }}{{ cluster_cert_filename }}"},
+                        {"name": "ssl_server_keystore_location", "value": "{{ cluster_keystore_path }}{{ cluster_keystore_filename }}"},
+                        {"name": "ssl_server_keystore_password", "value": "{{ keystore_password }}"},
+                        {"name": "ssl_client_truststore_location", "value": "{{ cluster_keystore_path }}{{ cluster_truststore_filename }}"},
+                        {"name": "ssl_client_truststore_password", "value": "{{ truststore_password }}"}
+                    ]
+                }

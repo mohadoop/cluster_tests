@@ -1,0 +1,46 @@
+{
+   "services": [
+        {
+            "serviceType": "RANGER",
+            "refName": "ranger", 
+            "roleConfigGroups": [
+                {
+                    "refName": "ranger-RANGER_USERSYNC-BASE",
+                    "roleType": "RANGER_USERSYNC",
+                    "base": true, 
+                    "configs": [
+                        {"name": "ssl_client_truststore_password", "value": "Cloudera123"},
+                        {"name": "ssl_client_truststore_location", "value": "/opt/cloudera/security/pki/cluster_truststore.jks"}
+                    ]
+                }, 
+                {
+                    "refName": "ranger-RANGER_ADMIN-BASE",
+                    "roleType": "RANGER_ADMIN",
+                    "base": true, 
+                    "configs": [
+                        {"name": "ranger.db.ssl.certificateFile", "value": "/opt/cloudera/security/pki/host.crt"},
+                        {"name": "ssl_server_keystore_location", "value": "/opt/cloudera/security/pki/host_keystore.jks"},
+                        {"name": "ssl_server_keystore_password", "value": "Cloudera123"},
+                        {"name": "ssl_client_truststore_location", "value": "/opt/cloudera/security/pki/cluster_truststore.jks"},
+                        {"name": "ssl_client_truststore_password", "value": "Cloudera123"},
+                        {"name": "ranger.keystore.file", "value": "/opt/cloudera/security/pki/host_keystore.jks"},
+                        {"name": "ranger.keystore.password", "value": "Cloudera123"},
+                        {"name": "ssl_enabled", "value": "true"}
+                    ]
+                },
+                {
+                    "refName": "ranger-RANGER_TAGSYNC-BASE",
+                    "roleType": "RANGER_TAGSYNC",
+                    "base": true, 
+                    "configs": [
+                        {"name": "ssl_server_keystore_location", "value": "/opt/cloudera/security/pki/host_keystore.jks"},
+                        {"name": "ssl_server_keystore_password", "value": "Cloudera123"},
+                        {"name": "ssl_client_truststore_location", "value": "/opt/cloudera/security/pki/cluster_truststore.jks"},
+                        {"name": "ssl_client_truststore_password", "value": "Cloudera123"},
+                        {"name": "ssl_enabled", "value": "true"}
+                    ]
+                }
+            ]
+        }
+    ]
+}

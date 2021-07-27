@@ -1,0 +1,12 @@
+                {
+                    "refName": "{{ ref_name }}", 
+                    "roleType": "HUE_SERVER",
+                    "base": false, 
+                    "configs": [
+                        {"name": "ssl_certificate", "value": "{{ cluster_ssl_cert_path }}{{ cluster_cert_filename }}"},
+                        {"name": "ssl_private_key_password", "value": "{{ key_password }}"},
+                        {"name": "ssl_cacerts", "value": "{{ cluster_ssl_cert_path }}{{ cluster_ca_cert_filename }}"},
+                        {"name": "ssl_enable", "value": "true"},
+                        {"name": "ssl_private_key", "value": "{{ cluster_ssl_cert_path }}{{ cluster_key_pem_filename }}"}
+                    ]
+                }

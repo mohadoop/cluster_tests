@@ -1,0 +1,27 @@
+{
+   "services": [
+        {
+            "serviceType": "HIVE_ON_TEZ",
+            "refName": "hive_on_tez",
+            "roleConfigGroups": [
+                {
+                    "refName": "hive_on_tez-HIVESERVER2-BASE",
+                    "roleType": "HIVESERVER2",
+                    "base": false,
+                    "configs": [
+                        {"name": "ssl_server_keystore_location", "value": "/opt/cloudera/security/pki/host_keystore.jks"},
+                        {"name": "ssl_server_keystore_password", "value": "Cloudera123"},
+                        {"name": "ssl_enabled", "value": "true"}
+                    ]
+                }
+            ], 
+            "serviceConfigs": [
+                {"name": "hiveserver2_truststore_file", "value": "/opt/cloudera/security/pki/cluster_truststore.jks"},
+                {"name": "hiveserver2_enable_ssl", "value": "true"},
+                {"name": "hiveserver2_keystore_password", "value": "Cloudera123"},
+                {"name": "hiveserver2_keystore_path", "value": "/opt/cloudera/security/pki/host_keystore.jks"},
+                {"name": "hiveserver2_truststore_password", "value": "Cloudera123"}
+            ]
+        }
+    ]
+}

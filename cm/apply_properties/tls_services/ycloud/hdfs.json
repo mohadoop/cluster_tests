@@ -1,0 +1,30 @@
+{
+   "services": [
+        {
+            "serviceType": "HDFS",
+            "refName": "hdfs", 
+            "roleConfigGroups": [
+                {
+                    "refName": "hdfs-NAMENODE-1",
+                    "roleType": "NAMENODE",
+                    "base": false, 
+                    "configs": [
+                        {"name": "namenode_truststore_password", "value": "Cloudera123"},
+                        {"name": "namenode_truststore_file", "value": "/opt/cloudera/security/pki/cluster_truststore.jks"}
+                    ]
+                }
+            ], 
+            "serviceConfigs": [
+                {"name": "hdfs_hadoop_ssl_enabled", "value": "true"},
+                {"name": "ssl_client_truststore_location", "value": "/opt/cloudera/security/pki/cluster_truststore.jks"},
+                {"name": "ssl_client_truststore_password", "value": "Cloudera123"},
+                {"name": "hadoop_group_mapping_ldap_keystore", "value": "/opt/cloudera/security/pki/host_keystore.jks"},
+                {"name": "hadoop_group_mapping_ldap_keystore_passwd", "value": "Cloudera123"},
+                {"name": "ssl_server_keystore_password", "value": "Cloudera123"},
+                {"name": "ssl_server_keystore_keypassword", "value": "Cloudera123"},
+                {"name": "hadoop_group_mapping_ldap_use_ssl", "value": "true"},
+                {"name": "ssl_server_keystore_location", "value": "/opt/cloudera/security/pki/host_keystore.jks"}
+            ]
+        }
+    ]
+}

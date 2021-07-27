@@ -1,0 +1,13 @@
+                {
+                    "refName": "{{ ref_name }}", 
+                    "roleType": "SERVER",
+                    "base": false, 
+                    "configs": [
+                        {"name": "jmx_tls_truststore_password", "value": "{{ truststore_password }}"}, 
+                        {"name": "jmx_tls_client_auth_enabled", "value": "true"}, 
+                        {"name": "jmx_tls_enabled", "value": "true"}, 
+                        {"name": "jmx_tls_truststore", "value": "{{ cluster_keystore_path }}{{ cluster_truststore_filename }}"},
+                        {"name": "jmx_tls_keystore", "value": "{{ cluster_keystore_path }}{{ cluster_keystore_filename }}"},
+                        {"name": "jmx_tls_keystore_password", "value": "{{ keystore_password }}"}
+                    ]
+                }

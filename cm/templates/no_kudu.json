@@ -1,0 +1,471 @@
+{
+    "cdhVersion": "7.1.6", 
+    "cmVersion": "7.3.1", 
+    "displayName": "CDP_cluster_0701_3",
+    "repositories": [
+        "https://archive.cloudera.com/p/cdh7/{latest_supported}/parcels/",
+        "https://archive.cloudera.com/cdh7/{latest_supported}/parcels/",
+        "https://archive.cloudera.com/p/cdh6/{latest_supported}/parcels/",
+        "https://archive.cloudera.com/cdh6/{latest_supported}/parcels/",
+        "https://archive.cloudera.com/p/cdh5/parcels/latest",
+        "https://archive.cloudera.com/cdh5/parcels/5.16/",
+        "https://parcels.repos.intel.com/mkl/latest",
+        "https://archive.cloudera.com/accumulo-c5/parcels/latest/",
+        "https://archive.cloudera.com/accumulo6/6.1/parcels/",
+        "https://archive.cloudera.com/kafka/parcels/latest/",
+        "http://archive.cloudera.com/kudu/parcels/latest/",
+        "https://archive.cloudera.com/sqoop-teradata-connector1/latest/parcels/",
+        "https://archive.cloudera.com/sqoop-netezza-connector1/latest/",
+        "https://archive.cloudera.com/sqoop-connectors/parcels/latest/"
+    ],
+    "products": [
+        {
+            "product": "CDH", 
+            "version": "7.1.6-1.cdh7.1.6.p0.10506313"
+        }
+    ], 
+    "hostTemplates": [
+        {
+            "refName": "Utility-Host-1",
+            "cardinality": 1,
+            "roleConfigGroupsRefNames": ["hive-GATEWAY-BASE"]
+        },
+        
+        {
+            "refName": "Utility-Host-2", 
+            "cardinality": 1,
+            "roleConfigGroupsRefNames": ["hive-HIVEMETASTORE-BASE", "impala-CATALOGSERVER-BASE", "impala-STATESTORE-BASE", "hdfs-NFSGATEWAY-BASE", "cruise_control-CRUISE_CONTROL_SERVER-BASE", "schemaregistry-SCHEMA_REGISTRY_SERVER-BASE", "streams_messaging_manager-STREAMS_MESSAGING_MANAGER_SERVER-BASE", "streams_messaging_manager-STREAMS_MESSAGING_MANAGER_UI-BASE"]
+        },
+        
+        {
+            "refName": "Master-Node-1", 
+            "cardinality": 1,
+            "roleConfigGroupsRefNames": ["zookeeper-SERVER-BASE", "hdfs-JOURNALNODE-BASE", "hbase-MASTER-BASE", "hdfs-FAILOVERCONTROLLER-BASE", "hdfs-NAMENODE-1", "yarn-RESOURCEMANAGER-BASE","atlas-ATLAS_SERVER-BASE", "solr-SOLR_SERVER-BASE","kafka-KAFKA_CONNECT-BASE"]
+        },      
+        
+        {
+            "refName": "Master-Node-2", 
+            "cardinality": 1,
+            "roleConfigGroupsRefNames": [ "hdfs-BALANCER-BASE", "zookeeper-SERVER-BASE", "hdfs-JOURNALNODE-BASE", "hbase-MASTER-BASE", "hdfs-FAILOVERCONTROLLER-BASE", "hdfs-NAMENODE-1", "yarn-RESOURCEMANAGER-BASE", "ozone-OZONE_MANAGER-BASE"]     
+        },
+        
+        {
+            "refName": "Master-Node-3", 
+            "cardinality": 1,
+            "roleConfigGroupsRefNames": ["zookeeper-SERVER-BASE", "hdfs-JOURNALNODE-BASE", "hbase-MASTER-BASE", "yarn-JOBHISTORY-BASE",  "ozone-OZONE_MANAGER-BASE", "spark-SPARK_YARN_HISTORY_SERVER-BASE", "ozone-OZONE_RECON-BASE", "ozone-STORAGE_CONTAINER_MANAGER-BASE", "queuemanager-QUEUEMANAGER_STORE-BASE", "queuemanager-QUEUEMANAGER_WEBAPP-BASE"]
+        },
+        
+        {
+            "refName": "Worker-Node", 
+            "cardinality": 3,
+            "roleConfigGroupsRefNames": ["hdfs-DATANODE-BASE", "yarn-NODEMANAGER-BASE", "impala-IMPALAD-BASE", "ozone-OZONE_DATANODE-BASE", "kafka-KAFKA_BROKER-BASE", "hbase-REGIONSERVER-BASE", "streams_replication_manager-STREAMS_REPLICATION_MANAGER_DRIVER-BASE", "streams_replication_manager-STREAMS_REPLICATION_MANAGER_SERVICE-BASE"]
+        },
+        
+        {
+            "refName": "Edge-Node", 
+            "cardinality": 1,
+            "roleConfigGroupsRefNames": ["oozie-OOZIE_SERVER-BASE", "hive-GATEWAY-BASE", "hive_on_tez-GATEWAY-BASE", "hive_on_tez-HIVESERVER2-BASE", "livy-GATEWAY-BASE", "livy-LIVY_SERVER-BASE","ozone-GATEWAY-BASE", "spark-GATEWAY-BASE", "sqoop-GATEWAY-BASE", "tez-GATEWAY-BASE", "kafka-GATEWAY-BASE", "hdfs-GATEWAY-BASE", "hbase-GATEWAY-BASE", "yarn-GATEWAY-BASE", "hue-HUE_LOAD_BALANCER-BASE", "hue-HUE_SERVER-BASE", "phoenix-PHOENIX_QUERY_SERVER-BASE", "ozone-S3_GATEWAY-BASE", "hbase-HBASETHRIFTSERVER-BASE", "zeppelin-ZEPPELIN_SERVER-BASE"]
+        }
+    ], 
+
+    "instantiator": {
+        "clusterName": "CDP_cluster_0701_3", 
+        "hosts": [
+            {
+                "hostName": "ccycloud-4.tkreutzer.root.hwx.site", 
+                "hostTemplateRefName": "Utility-Host-1"
+            }, 
+            {
+                "hostName": "ccycloud-5.tkreutzer.root.hwx.site", 
+                "hostTemplateRefName": "Utility-Host-2"
+            }, 
+            {
+                "hostName": "ccycloud-1.tkreutzer.root.hwx.site", 
+                "hostTemplateRefName": "Master-Node-1"
+            }, 
+            {
+                "hostName": "ccycloud-2.tkreutzer.root.hwx.site", 
+                "hostTemplateRefName": "Master-Node-2"
+            },
+            {
+                "hostName": "ccycloud-3.tkreutzer.root.hwx.site", 
+                "hostTemplateRefName": "Master-Node-3"
+            },
+            {
+                "hostNameRange": "ccycloud-[6-8].tkreutzer.root.hwx.site", 
+                "hostTemplateRefName": "Worker-Node"
+            },
+            {
+                "hostName": "ccycloud-9.tkreutzer.root.hwx.site", 
+                "hostTemplateRefName": "Edge-Node"
+            }
+        ], 
+        "lenient": false, 
+        "roleConfigGroups": [
+            {
+                "name": "", 
+                "rcgRefName": "yarn-NODEMANAGER-BASE"
+            },
+            {
+                "name": "", 
+                "rcgRefName": "hdfs-NAMENODE-1"
+            }
+        ], 
+        "variables": [
+            {"name": "hdfs-JOURNALNODE-BASE-dfs_journalnode_edits_dir", "value": "/dfs/jn"},
+            {"name": "dfs-federation-namenode-nameservice", "value": "nameservice1"},
+
+            {"name": "hbase-service-config-safety-valve", "value": "\n      <property>\n        <name>phoenix.functions.allowUserDefinedFunctions</name>\n        <value>true</value>\n      </property>\n      <property>\n        <name>phoenix.schema.isNamespaceMappingEnabled</name>\n        <value>true</value>\n      </property>"},
+            {"name": "hbase-client-config-safety-valve", "value": "\n      <property>\n        <name>phoenix.functions.allowUserDefinedFunctions</name>\n        <value>true</value>\n      </property>\n      <property>\n        <name>phoenix.schema.isNamespaceMappingEnabled</name>\n        <value>true</value>\n      </property>"},
+            {"name": "hbase-enable-indexing", "value": "true"}, 
+            {"name": "hbase-enable-replication", "value": "true"}, 
+            {"name": "hbase-zookeeper-session-timeout", "value": "30000"},
+                
+            {"name": "hive-hive_metastore_database_host", "value": "ccycloud-1.tkreutzer.root.hwx.site"}, 
+            {"name": "hive-hive_metastore_database_name", "value": "metastore"}, 
+            {"name": "hive-hive_metastore_database_password", "value": "Cloudera123"}, 
+            {"name": "hive-hive_metastore_database_port", "value": "3306"}, 
+            {"name": "hive-hive_metastore_database_type", "value": "mysql"}, 
+            {"name": "hive-hive_metastore_database_user", "value": "hive"}, 
+
+            {"name": "hue-database_host", "value": "ccycloud-1.tkreutzer.root.hwx.site"}, 
+            {"name": "hue-database_name", "value": "hue"}, 
+            {"name": "hue-database_password", "value": "Cloudera123"}, 
+            {"name": "hue-database_port", "value": "3306"}, 
+            {"name": "hue-database_type", "value": "mysql"}, 
+            {"name": "hue-database_user", "value": "hue"}, 
+
+            {"name": "impala-IMPALAD-BASE-scratch_dirs", "value": "/dataroot/ycloud/impala/impalad"},
+
+            {"name": "atlas-ATLAS_SERVER-BASE-atlas_admin_password", "value": "Cloudera123"},
+
+            {"name": "oozie-OOZIE_SERVER-BASE-oozie_database_host", "value": "ccycloud-1.tkreutzer.root.hwx.site:3306"}, 
+            {"name": "oozie-OOZIE_SERVER-BASE-oozie_database_name", "value": "oozie"}, 
+            {"name": "oozie-OOZIE_SERVER-BASE-oozie_database_password", "value": "Cloudera123"}, 
+            {"name": "oozie-OOZIE_SERVER-BASE-oozie_database_type", "value": "mysql"}, 
+            {"name": "oozie-OOZIE_SERVER-BASE-oozie_database_user", "value": "oozie"},
+
+            {"name": "schemaregistry-database_host", "value": "ccycloud-1.tkreutzer.root.hwx.site"}, 
+            {"name": "schemaregistry-database_name", "value": "schemaregistry"}, 
+            {"name": "schemaregistry-database_password", "value": "Cloudera123"}, 
+            {"name": "schemaregistry-database_port", "value": "3306"}, 
+            {"name": "schemaregistry-database_type", "value": "mysql"}, 
+            {"name": "schemaregistry-database_user", "value": "schemaregistry"}, 
+
+            {"name": "streams_messaging_manager-smm_database_host", "value": "ccycloud-1.tkreutzer.root.hwx.site"}, 
+            {"name": "streams_messaging_manager-smm_database_name", "value": "smm"}, 
+            {"name": "streams_messaging_manager-smm_database_password", "value": "Cloudera123"}, 
+            {"name": "streams_messaging_manager-smm_database_port", "value": "3306"}, 
+            {"name": "streams_messaging_manager-smm_database_type", "value": "mysql"}, 
+            {"name": "streams_messaging_manager-smm_database_user", "value": "smm"},
+            
+            {"name": "streams-replication-manager-service-target-cluster", "value": "primary"},
+            {"name": "streams-replication-manager-driver-target-cluster", "value": "primary"},
+            {"name": "streams-replication-manager-config", "value": "bootstrap.servers=ccycloud-6.tkreutzer.root.hwx.site:9092"},
+            
+            {"name": "kafka-bootstrap-servers", "value": "ccycloud-6.tkreutzer.root.hwx.site:9092,ccycloud-7.tkreutzer.root.hwx.site:9092,ccycloud-8.tkreutzer.root.hwx.site:9092"},
+            {"name": "kafka-connect-protocol", "value": "http"}, 
+            {"name": "kafka-connect-host", "value": "ccycloud-1.tkreutzer.root.hwx.site"}, 
+            {"name": "kafka-connect-port", "value": "28083"},
+            
+            {"name": "schema-registry-jar-storage-type", "value": "hdfs"}
+        ]
+    },  
+
+    "services": [
+        {
+            "serviceType": "ZOOKEEPER",
+            "refName": "zookeeper", 
+            "roleConfigGroups": [{"base": true, "refName": "zookeeper-SERVER-BASE", "roleType": "SERVER"}]
+        }, 
+        {
+            "serviceType": "HDFS",
+            "refName": "hdfs", 
+            "roleConfigGroups": [
+                {"base": true, "refName": "hdfs-FAILOVERCONTROLLER-BASE", "roleType": "FAILOVERCONTROLLER"}, 
+                {
+                    "base": false, 
+                    "configs": [
+                        {"name": "dfs_federation_namenode_nameservice", "variable": "dfs-federation-namenode-nameservice"},
+                        {"name": "dfs_namenode_quorum_journal_name", "variable": "dfs-federation-namenode-nameservice"},
+                        {"name": "autofailover_enabled", "value": "true"}
+                    ], 
+                    "refName": "hdfs-NAMENODE-1", 
+                    "roleType": "NAMENODE"
+                }, 
+                {"base": true, "refName": "hdfs-DATANODE-BASE", "roleType": "DATANODE"},
+                {"base": true, "refName": "hdfs-BALANCER-BASE", "roleType": "BALANCER"},
+                {"base": true, "refName": "hdfs-GATEWAY-BASE", "roleType": "GATEWAY"}, 
+                {
+                    "base": true, 
+                    "configs": [{"name": "dfs_journalnode_edits_dir", "variable": "hdfs-JOURNALNODE-BASE-dfs_journalnode_edits_dir"}], 
+                    "refName": "hdfs-JOURNALNODE-BASE", 
+                    "roleType": "JOURNALNODE"
+                }, 
+                {"base": true, "refName": "hdfs-NFSGATEWAY-BASE", "roleType": "NFSGATEWAY"}
+            ]
+        }, 
+        {
+            "serviceType": "HBASE",
+            "refName": "hbase", 
+            "roleConfigGroups": [
+                {"base": true, "refName": "hbase-REGIONSERVER-BASE", "roleType": "REGIONSERVER"}, 
+                {"base": true, "refName": "hbase-MASTER-BASE", "roleType": "MASTER"}, 
+                {"base": true, "refName": "hbase-HBASETHRIFTSERVER-BASE", "roleType": "HBASETHRIFTSERVER"}, 
+                {
+                    "base": true, 
+                    "configs": [
+                        {"name": "hbase_client_config_safety_valve", "variable": "hbase-client-config-safety-valve"}
+                    ], 
+                    "refName": "hbase-GATEWAY-BASE", 
+                    "roleType": "GATEWAY"
+                }
+            ], 
+            "serviceConfigs": [
+                {"name": "hbase_enable_indexing", "variable": "hbase-enable-indexing"}, 
+                {"name": "hbase_enable_replication", "variable": "hbase-enable-replication"}, 
+                {"name": "zookeeper_session_timeout", "variable": "hbase-zookeeper-session-timeout"},
+                {"name": "hbase_service_config_safety_valve", "variable": "hbase-service-config-safety-valve"}
+            ]
+        }, 
+        {
+            "serviceType": "OOZIE",
+            "refName": "oozie", 
+            "roleConfigGroups": [
+                {"base": true, "refName": "oozie-OOZIE_SERVER-BASE", "roleType": "OOZIE_SERVER",
+                    "configs": [
+                        {"name": "oozie_database_type", "variable": "oozie-OOZIE_SERVER-BASE-oozie_database_type"},
+                        {"name": "oozie_database_password", "variable": "oozie-OOZIE_SERVER-BASE-oozie_database_password"},
+                        {"name": "oozie_database_user", "variable": "oozie-OOZIE_SERVER-BASE-oozie_database_user"},
+                        {"name": "oozie_database_host", "variable": "oozie-OOZIE_SERVER-BASE-oozie_database_host"},
+                        {"name": "oozie_database_name", "variable": "oozie-OOZIE_SERVER-BASE-oozie_database_name"}
+                    ]
+                }
+            ]
+        },
+        {
+            "serviceType": "HIVE",
+            "refName": "hive", 
+            "roleConfigGroups": [
+                {"base": true, "refName": "hive-GATEWAY-BASE", "roleType": "GATEWAY"},
+                {"base": true, "refName": "hive-HIVEMETASTORE-BASE", "roleType": "HIVEMETASTORE"}
+            ], 
+            "serviceConfigs": [
+                {"name": "hive_metastore_database_password", "variable": "hive-hive_metastore_database_password"}, 
+                {"name": "hive_metastore_database_name", "variable": "hive-hive_metastore_database_name"}, 
+                {"name": "hive_metastore_database_user", "variable": "hive-hive_metastore_database_user"}, 
+                {"name": "hive_metastore_database_host", "variable": "hive-hive_metastore_database_host"}, 
+                {"name": "hive_metastore_database_type", "variable": "hive-hive_metastore_database_type"}, 
+                {"name": "hive_metastore_database_port", "variable": "hive-hive_metastore_database_port"}
+            ]
+        },
+        {
+            "serviceType": "HUE",
+            "refName": "hue", 
+            "roleConfigGroups": [
+                {"base": true, "refName": "hue-HUE_LOAD_BALANCER-BASE", "roleType": "HUE_LOAD_BALANCER"}, 
+                {"base": true, "refName": "hue-HUE_SERVER-BASE", "roleType": "HUE_SERVER"}
+            ], 
+            "serviceConfigs": [
+                {"name": "database_password", "variable": "hue-database_password"}, 
+                {"name": "database_port", "variable": "hue-database_port"}, 
+                {"name": "database_host", "variable": "hue-database_host"}, 
+                {"name": "database_user", "variable": "hue-database_user"}, 
+                {"name": "database_name", "variable": "hue-database_name"}, 
+                {"name": "database_type", "variable": "hue-database_type"}
+            ]
+        }, 
+        {
+            "serviceType": "SOLR",
+            "refName": "solr", 
+            "roleConfigGroups": [{"base": true, "refName": "solr-SOLR_SERVER-BASE","roleType": "SOLR_SERVER"}]
+        },
+        {
+            "serviceType": "YARN",
+            "refName": "yarn", 
+            "roleConfigGroups": [
+                {"base": true, "refName": "yarn-NODEMANAGER-BASE", "roleType": "NODEMANAGER"},
+                {"base": true, "refName": "yarn-JOBHISTORY-BASE", "roleType": "JOBHISTORY"},
+                {"base": true, "refName": "yarn-GATEWAY-BASE", "roleType": "GATEWAY"}, 
+                {"base": true, "refName": "yarn-RESOURCEMANAGER-BASE", "roleType": "RESOURCEMANAGER"}
+            ]
+        }, 
+        {
+            "serviceType": "IMPALA",
+            "refName": "impala", 
+            "roleConfigGroups": [
+                {"base": true, "refName": "impala-STATESTORE-BASE", "roleType": "STATESTORE"}, 
+                {"base": true, "refName": "impala-CATALOGSERVER-BASE", "roleType": "CATALOGSERVER"}, 
+                {"base": true, "refName": "impala-IMPALAD-BASE", "roleType": "IMPALAD"}
+            ]
+        }, 
+        {
+            "serviceType": "SQOOP_CLIENT",
+            "refName": "sqoop",
+            "roleConfigGroups": [{"base": true, "refName": "sqoop-GATEWAY-BASE", "roleType": "GATEWAY"}]
+            
+        }, 
+        {
+            "serviceType": "SPARK_ON_YARN",
+            "refName": "spark", 
+            "roleConfigGroups": [
+                {"base": true, "refName": "spark-SPARK_YARN_HISTORY_SERVER-BASE", "roleType": "SPARK_YARN_HISTORY_SERVER"}, 
+                {"base": true, "refName": "spark-GATEWAY-BASE", "roleType": "GATEWAY"}
+            ]
+        }, 
+        {
+            "serviceType": "KAFKA",
+            "refName": "kafka", 
+            "roleConfigGroups": [
+                {"base": true, "refName": "kafka-KAFKA_BROKER-BASE", "roleType": "KAFKA_BROKER"}, 
+                {"base": true, "refName": "kafka-GATEWAY-BASE", "roleType": "GATEWAY"},
+                {
+                    "base": true, 
+                    "configs": [{"name": "bootstrap.servers", "variable": "kafka-bootstrap-servers"}],
+                    "refName": "kafka-KAFKA_CONNECT-BASE", 
+                    "roleType": "KAFKA_CONNECT"
+                }
+            ]
+        }, 
+        {
+            "serviceType": "HIVE_ON_TEZ",
+            "refName": "hive_on_tez", 
+            "roleConfigGroups": [
+                {"base": true, "refName": "hive_on_tez-HIVESERVER2-BASE", "roleType": "HIVESERVER2"}, 
+                {"base": true, "refName": "hive_on_tez-GATEWAY-BASE", "roleType": "GATEWAY"}
+            ]
+        }, 
+        {
+            "serviceType": "LIVY",
+            "refName": "livy", 
+            "roleConfigGroups": [
+                {"base": true, "refName": "livy-GATEWAY-BASE", "roleType": "GATEWAY"}, 
+                {"base": true, "refName": "livy-LIVY_SERVER-BASE", "roleType": "LIVY_SERVER"}
+            ]
+        }, 
+        {
+            "serviceType": "OZONE",
+            "refName": "ozone", 
+            "roleConfigGroups": [
+                {"base": true, "refName": "ozone-GATEWAY-BASE", "roleType": "GATEWAY"}, 
+                {"base": true, "refName": "ozone-OZONE_MANAGER-BASE", "roleType": "OZONE_MANAGER"}, 
+                {"base": true, "refName": "ozone-STORAGE_CONTAINER_MANAGER-BASE", "roleType": "STORAGE_CONTAINER_MANAGER"}, 
+                {"base": true, "refName": "ozone-OZONE_RECON-BASE", "roleType": "OZONE_RECON"}, 
+                {"base": true, "refName": "ozone-OZONE_DATANODE-BASE", "roleType": "OZONE_DATANODE"}, 
+                {"base": true, "refName": "ozone-S3_GATEWAY-BASE", "roleType": "S3_GATEWAY"}
+            ], 
+            "serviceConfigs": [{"name": "ozone.service.id", "value": "ozone1"}]
+        }, 
+        {
+            "serviceType": "TEZ",
+            "refName": "tez", 
+            "roleConfigGroups": [{"base": true, "refName": "tez-GATEWAY-BASE", "roleType": "GATEWAY"}]
+        }, 
+        {
+            "serviceType": "ZEPPELIN",
+            "refName": "zeppelin", 
+            "roleConfigGroups": [{"base": true, "refName": "zeppelin-ZEPPELIN_SERVER-BASE", "roleType": "ZEPPELIN_SERVER"}]
+        }, 
+        {
+            "serviceType": "PHOENIX",
+            "refName": "phoenix", 
+            "roleConfigGroups": [{"base": true, "refName": "phoenix-PHOENIX_QUERY_SERVER-BASE", "roleType": "PHOENIX_QUERY_SERVER"}]
+        }, 
+        {
+            "serviceType": "SCHEMAREGISTRY",
+            "refName": "schemaregistry", 
+            "roleConfigGroups": [
+                {
+                    "base": true, 
+                    "configs": [{"name": "schema.registry.jar.storage.type", "variable": "schema-registry-jar-storage-type"}], 
+                    "refName": "schemaregistry-SCHEMA_REGISTRY_SERVER-BASE", 
+                    "roleType": "SCHEMA_REGISTRY_SERVER"
+                }
+            ], 
+            "serviceConfigs": [
+                {"name": "database_password", "variable": "schemaregistry-database_password"}, 
+                {"name": "database_user", "variable": "schemaregistry-database_user"}, 
+                {"name": "database_port", "variable": "schemaregistry-database_port"}, 
+                {"name": "database_host", "variable": "schemaregistry-database_host"}, 
+                {"name": "database_type", "variable": "schemaregistry-database_type"}, 
+                {"name": "database_name", "variable": "schemaregistry-database_name"}
+            ]
+        }, 
+        {
+            "serviceType": "STREAMS_MESSAGING_MANAGER",
+            "refName": "streams_messaging_manager", 
+            "roleConfigGroups": [
+                {
+                    "base": true, 
+                    "configs": [
+                        {"name": "kafka.connect.protocol", "variable": "kafka-connect-protocol"}, 
+                        {"name": "kafka.connect.host", "variable": "kafka-connect-host"}, 
+                        {"name": "kafka.connect.port", "variable": "kafka-connect-port"}
+                    ], 
+                    "refName": "streams_messaging_manager-STREAMS_MESSAGING_MANAGER_SERVER-BASE", 
+                    "roleType": "STREAMS_MESSAGING_MANAGER_SERVER"
+                }, 
+                {
+                    "base": true, 
+                    "refName": "streams_messaging_manager-STREAMS_MESSAGING_MANAGER_UI-BASE",
+                    "roleType": "STREAMS_MESSAGING_MANAGER_UI"
+                }
+            ], 
+            "serviceConfigs": [
+                {"name": "smm_database_name", "variable": "streams_messaging_manager-smm_database_name"},
+                {"name": "smm_database_type", "variable": "streams_messaging_manager-smm_database_type"},
+                {"name": "smm_database_password", "variable": "streams_messaging_manager-smm_database_password"},
+                {"name": "smm_database_user", "variable": "streams_messaging_manager-smm_database_user"},
+                {"name": "smm_database_port", "variable": "streams_messaging_manager-smm_database_port"},
+                {"name": "smm_database_host", "variable": "streams_messaging_manager-smm_database_host"}
+            ]
+        }, 
+        {
+            "serviceType": "CRUISE_CONTROL",
+            "refName": "cruise_control",
+            "roleConfigGroups": [{"base": true, "refName": "cruise_control-CRUISE_CONTROL_SERVER-BASE", "roleType": "CRUISE_CONTROL_SERVER"}]
+        }, 
+        {
+            "serviceType": "STREAMS_REPLICATION_MANAGER",
+            "refName": "streams_replication_manager",
+            "roleConfigGroups": [
+                {
+                    "base": true, 
+                    "configs": [{"name": "streams.replication.manager.service.target.cluster", "variable": "streams-replication-manager-service-target-cluster"}], 
+                    "refName": "streams_replication_manager-STREAMS_REPLICATION_MANAGER_SERVICE-BASE", 
+                    "roleType": "STREAMS_REPLICATION_MANAGER_SERVICE"
+                }, 
+                {
+                    "base": true, 
+                    "configs": [{"name": "streams.replication.manager.driver.target.cluster", "variable": "streams-replication-manager-driver-target-cluster"}],
+                    "refName": "streams_replication_manager-STREAMS_REPLICATION_MANAGER_DRIVER-BASE",
+                    "roleType": "STREAMS_REPLICATION_MANAGER_DRIVER"
+                }
+            ],
+            "serviceConfigs": [
+                {"name": "clusters", "value": "primary,secondary"},
+                {"name": "streams.replication.manager.config", "variable": "streams-replication-manager-config"}
+            ]
+        },
+        {
+            "serviceType": "ATLAS",
+            "refName": "atlas", 
+            "roleConfigGroups": [
+                {
+                    "base": true, 
+                    "configs": [{"name": "atlas_admin_password", "variable": "atlas-ATLAS_SERVER-BASE-atlas_admin_password"}], 
+                    "refName": "atlas-ATLAS_SERVER-BASE", 
+                    "roleType": "ATLAS_SERVER"
+                }
+            ]
+        },
+        {
+            "serviceType" : "QUEUEMANAGER",
+            "refName" : "queuemanager",
+            "roleConfigGroups" : [ 
+                {"base" : true, "refName" : "queuemanager-QUEUEMANAGER_STORE-BASE", "roleType" : "QUEUEMANAGER_STORE"},
+                {"base" : true, "refName" : "queuemanager-QUEUEMANAGER_WEBAPP-BASE", "roleType" : "QUEUEMANAGER_WEBAPP"}
+            ]
+        }
+    ]
+}

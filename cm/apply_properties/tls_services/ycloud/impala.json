@@ -1,0 +1,49 @@
+{
+   "services": [
+        {
+            "serviceType": "IMPALA",
+            "refName": "impala", 
+            "roleConfigGroups": [
+                {
+                    "refName": "impala-CATALOGSERVER-BASE", 
+                    "roleType": "CATALOGSERVER",
+                    "base": false, 
+                    "configs": [
+                        {"name": "webserver_private_key_password_cmd", "value": "Cloudera123"}, 
+                        {"name": "webserver_private_key_file", "value": "/opt/cloudera/security/pki/host.key"}, 
+                        {"name": "webserver_certificate_file", "value": "/opt/cloudera/security/pki/host.crt"}
+                    ]
+                }, 
+                {
+                    "refName": "impala-STATESTORE-BASE", 
+                    "roleType": "STATESTORE",
+                    "base": false, 
+                    "configs": [
+                        {"name": "webserver_private_key_password_cmd", "value": "Cloudera123"}, 
+                        {"name": "webserver_private_key_file", "value": "/opt/cloudera/security/pki/host.key"}, 
+                        {"name": "webserver_certificate_file", "value": "/opt/cloudera/security/pki/host.crt"}
+                    ]
+                }, 
+                {
+                    "refName": "impala-IMPALAD-BASE", 
+                    "roleType": "IMPALAD",
+                    "base": false, 
+                    "configs": [
+                        {"name": "webserver_private_key_password_cmd", "value": "Cloudera123"},
+                        {"name": "webserver_private_key_file", "value": "/opt/cloudera/security/pki/host.key"},
+                        {"name": "webserver_certificate_file", "value": "/opt/cloudera/security/pki/host.crt"}
+                    ]
+                }
+            ], 
+            "serviceConfigs": [
+                {"name": "ssl_client_ca_certificate", "value": "/opt/cloudera/security/pki/rootCA.pem"},
+                {"name": "impala_truststore_file", "value": "/opt/cloudera/security/pki/cluster_truststore.jks"},
+                {"name": "ssl_private_key", "value": "/opt/cloudera/security/pki/host.key"},
+                {"name": "ssl_server_certificate", "value": "/opt/cloudera/security/pki/host.crt"},
+                {"name": "impala_truststore_password", "value": "Cloudera123"},
+                {"name": "client_services_ssl_enabled", "value": "true"},
+                {"name": "ssl_private_key_password", "value": "Cloudera123"}
+            ]
+        }
+    ]
+}

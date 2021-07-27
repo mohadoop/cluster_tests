@@ -1,0 +1,55 @@
+{
+    "services": [
+        {
+            "serviceType": "KUDU",
+            "refName": "kudu", 
+            "roleConfigGroups": [
+                {
+                    "refName": "kudu-KUDU_MASTER-BASE", 
+                    "roleType": "KUDU_MASTER",
+                    "configs": [
+                        {"name": "fs_wal_dir", "value": "/var/lib/kudu/master"}, 
+                        {"name": "fs_data_dirs", "value": "/var/lib/kudu/master"}
+                    ]
+                }, 
+                {
+                    "refName": "kudu-KUDU_TSERVER-BASE", 
+                    "roleType": "KUDU_TSERVER",
+                    "configs": [
+                        {"name": "fs_wal_dir", "value": "/var/lib/kudu/tserver"}, 
+                        {"name": "fs_data_dirs", "value": "/var/lib/kudu/tserver"}
+                    ]
+                }
+            ]
+        },
+        {
+            "serviceType": "ZOOKEEPER",
+            "refName": "zookeeper", 
+            "roleConfigGroups": [
+                {
+                    "roleType": "SERVER",
+                    "refName": "zookeeper-SERVER-BASE"
+                }
+            ],
+            "serviceConfigs": [
+                {"name": "tickTime", "value": "3000"}
+            ]
+        },
+        {
+            "serviceType": "HUE",
+            "refName": "hue", 
+            "roleConfigGroups": [
+                {"base": true, "refName": "hue-HUE_LOAD_BALANCER-BASE", "roleType": "HUE_LOAD_BALANCER"}, 
+                {"base": true, "refName": "hue-HUE_SERVER-BASE", "roleType": "HUE_SERVER"}
+            ], 
+            "serviceConfigs": [
+                {"name": "database_password", "value": "Cloudera123"}, 
+                {"name": "database_port", "value": "3306"}, 
+                {"name": "database_host", "value": "ccycloud-1.tkreutzer.root.hwx.site"}, 
+                {"name": "database_user", "value": "hue"}, 
+                {"name": "database_name", "value": "hue"}, 
+                {"name": "database_type", "value": "mysql"}
+            ]
+        }
+    ]
+}
